@@ -7,10 +7,10 @@ import { saveCodeSnippet } from "@/utils/api";
 function HomePage() {
 	const [shareLink, setShareLink] = useState<string>("");
 
-	async function handleSaveCode(code: string): Promise<void> {
+	const handleSaveCode = async (code: string): Promise<void> => {
 		const id = await saveCodeSnippet(code);
 		setShareLink(`${window.location.origin}/${id}`);
-	}
+	};
 
 	return (
 		<div className="flex justify-center items-center w-full h-screen">

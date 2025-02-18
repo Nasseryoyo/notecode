@@ -14,9 +14,9 @@ export default function CodeEditor({
 }: CodeEditorProps) {
 	const [code, setCode] = useState<string>(initialCode);
 
-	function handleEditorChange(value: string | undefined): void {
+	const handleEditorChange = (value: string | undefined): void => {
 		setCode(value || "");
-	}
+	};
 
 	return (
 		<div className="w-full h-screen flex flex-col justify-center items-center">
