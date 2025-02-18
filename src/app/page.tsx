@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import CodeEditor from "@/components/editor";
-import { saveCodeSnippet } from "@/utils/api";
+import { saveCodeSnippet } from "@/hooks/apiSnippets";
 
 function HomePage() {
 	const [shareLink, setShareLink] = useState<string>("");

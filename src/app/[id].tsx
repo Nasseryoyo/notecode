@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { getCodeSnippet } from "@/utils/api";
+import { getCodeSnippet } from "@/hooks/apiSnippets";
 import CodeEditor from "@/components/editor";
 
 export default function CodeSharePage({ id }: { id: string }) {
