@@ -1,4 +1,4 @@
-import { Snippet } from "@/hooks/useSnippets";
+import { TSnippet } from "@/types/globals";
 import axios from "axios";
 
 const baseURL = "http://localhost:3000/api";
@@ -14,7 +14,7 @@ export function apiGetSnippet(id: string) {
 	});
 }
 
-export function apiCreateSnippet(payload: Snippet) {
+export function apiCreateSnippet(payload: TSnippet) {
 	return axios({
 		method: "POST",
 		url: "/snippets",
@@ -26,7 +26,7 @@ export function apiCreateSnippet(payload: Snippet) {
 	});
 }
 
-export function apiUpdateSnippet(id: string, payload: Snippet) {
+export function apiUpdateSnippet(id: string, payload: TSnippet) {
 	return axios({
 		method: "PUT",
 		url: `/snippets/${id}`,

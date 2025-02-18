@@ -1,42 +1,18 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import api, { apiCreateSnippet } from "./apiSnippets";
+import {
+	apiCreateSnippet,
+	apiGetSnippet,
+	apiUpdateSnippet,
+} from "./apiSnippets";
 
-// Type Definitions
-export interface Snippet {
-	id: string;
-	code: string;
-	language: string;
-}
+import { TSnippet } from "@/types/globals";
+import { toast } from "@/hooks/use-toast";
+import { onError } from "./onError";
 
-// Fetch a snippet by ID
-export const fetchSnippet = async (id: string): Promise<Snippet> => {
-	const response = await api.get(`/snippets/${id}`);
-	return response.data;
-};
-
-// Save a new snippet
-export const saveSnippet = async (
-	snippet: Partial<Snippet>
-): Promise<Snippet> => {
-	const response = await api.post(`/snippets`, snippet);
-	return response.data;
-};
-
-// Update an existing snippet
-export const updateSnippet = async ({
-	id,
-	code,
-}: {
-	id: string;
-	code: string;
-}) => {
-	const response = await api.put(`/snippets/${id}`, { code });
-	return response.data;
-};
-
+// Query Hooks Definitions
 export function useCreateSnippet(onSuccess: () => void) {
 	const mutation = useMutation({
-		mutationFn: (data: Snippet) => {
+		mutationFn: (data: TSnippet) => {
 			return apiCreateSnippet(data);
 		},
 		onError,
@@ -48,5 +24,35 @@ export function useCreateSnippet(onSuccess: () => void) {
 		},
 	});
 	const { mutate } = mutation;
-	return { doCreateAdmin: mutate, ...mutation };
+	return { doCreateSnippet: mutate, ...mutation };
+}
+
+export function useSnippet(id: string) {
+	const { data, refetch } = useQuery({
+		queryFn: () => apiGetSnippet(id),
+		queryKey: ["snippet", id],
+		// staleTime: 2 * 60 * 1000, // 2 minutes
+	});
+
+	return { data: data?.data, refetch };
+}
+
+export function useUpdateSnippet(onSuccess: () => void) {
+	const mutation = useMutation({
+		mutationFn: ({ id, data }: { id: string; data: TSnippet }) =>
+			apiUpdateSnippet(id, data),
+		onError,
+		onSuccess: () => {
+			onSuccess();
+			toast({
+				title: "Activity updated successfully!",
+			});
+		},
+	});
+
+	const { mutate } = mutation;
+
+	const doUpdateSnippet = (id: string, data: TSnippet) => mutate({ id, data });
+
+	return { doUpdateSnippet, ...mutation };
 }
