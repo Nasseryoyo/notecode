@@ -6,11 +6,7 @@ import CodeEditor from "@/components/editor";
 export default function CodeSharePage({ id }: { id: string }) {
 	const { data } = useSnippet(id);
 
-	return (
-		<div className="flex justify-center items-center w-full h-screen">
-			<CodeEditor initialCode={data.code} />
-		</div>
-	);
+	return <CodeEditor initialCode={data.code} id={id} />;
 }
 
 export async function getServerSideProps({
