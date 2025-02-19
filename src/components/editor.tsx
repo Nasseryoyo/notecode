@@ -66,9 +66,9 @@ export default function CodeEditor({
 
 	const handleShare = () => {
 		if (id) {
-			doUpdateSnippet(id, { code, language });
+			doUpdateSnippet(id, { code, language, theme });
 		} else {
-			doCreateSnippet({ code, language });
+			doCreateSnippet({ code, language, theme });
 		}
 		setIsShared(true);
 	};
