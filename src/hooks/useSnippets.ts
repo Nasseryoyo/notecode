@@ -19,7 +19,7 @@ export function useCreateSnippet(onSuccess: () => void) {
 		onSuccess: () => {
 			onSuccess();
 			toast({
-				title: "Admin created successfully!",
+				title: "Snippet created successfully!",
 			});
 		},
 	});
@@ -45,7 +45,7 @@ export function useUpdateSnippet(onSuccess: () => void) {
 		onSuccess: () => {
 			onSuccess();
 			toast({
-				title: "Activity updated successfully!",
+				title: "Snippet updated successfully!",
 			});
 		},
 	});
