@@ -9,6 +9,7 @@ export function apiGetSnippet(id: string) {
 		url: `/snippets/${id}`,
 		headers: {
 			"Content-Type": "application/json",
+			id: id,
 		},
 		baseURL: baseURL,
 	});
@@ -32,6 +33,7 @@ export function apiUpdateSnippet(id: string, payload: TSnippet) {
 		url: `/snippets/${id}`,
 		headers: {
 			"Content-Type": "application/json",
+			id: id,
 		},
 		baseURL: baseURL,
 		data: payload,

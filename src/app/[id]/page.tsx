@@ -7,5 +7,5 @@ export default function CodeSharePage() {
 	const id = useParams().id?.toString() ?? "";
 	const { data } = useSnippet(id);
 
-	return <CodeEditor initialCode={data?.code ?? ""} id={id} />;
+	return <CodeEditor initialCode={data?.code} id={id} />;
 }

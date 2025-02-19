@@ -47,6 +47,8 @@ export default function CodeEditor({
 	initialCode = defaultCode,
 	id,
 }: CodeEditorProps) {
+	console.log("CodeEditor -> id", id);
+	console.log("CodeEditor -> initialCode", initialCode);
 	const [code, setCode] = useState<string>(initialCode);
 
 	const [language, setLanguage] = useState<string>(languages[0]);
@@ -58,7 +60,7 @@ export default function CodeEditor({
 		setIsShared(false);
 	};
 
-	const [isShared, setIsShared] = useState(false);
+	const [isShared, setIsShared] = useState(id ? true : false);
 
 	const { doUpdateSnippet } = useUpdateSnippet(() => {});
 
