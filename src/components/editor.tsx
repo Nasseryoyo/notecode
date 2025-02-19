@@ -11,16 +11,22 @@ import MultiSelect from "./select";
 import { defaultCode, themes, languages } from "@/utils/config";
 
 export default function CodeEditor({
-	initialCode = defaultCode,
 	id,
+	initialCode,
+	initialLanguage,
+	initialTheme,
 }: {
-	initialCode?: string;
 	id?: string;
+	initialCode?: string;
+	initialLanguage?: string;
+	initialTheme?: string;
 }) {
-	const [code, setCode] = useState<string>(initialCode);
-	const [language, setLanguage] = useState<string>(languages[0]);
-	const [theme, setTheme] = useState<string>(themes[0]);
-	const [isShared, setIsShared] = useState<boolean>(!!id);
+	const [code, setCode] = useState<string>(initialCode || defaultCode);
+	const [language, setLanguage] = useState<string>(
+		initialLanguage || languages[0]
+	);
+	const [theme, setTheme] = useState<string>(initialTheme || themes[0]);
+	const [isShared, setIsShared] = useState<boolean>(id ? true : false);
 
 	const { doUpdateSnippet } = useUpdateSnippet(() => {});
 	const { doCreateSnippet } = useCreateSnippet(() => {});

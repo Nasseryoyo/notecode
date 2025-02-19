@@ -7,5 +7,19 @@ export default function CodeSharePage() {
 	const id = useParams().id?.toString() ?? "";
 	const { data } = useSnippet(id);
 
-	return <CodeEditor initialCode={data?.code} id={id} />;
+	if (!data)
+		return (
+			<div className="flex items-center justify-center h-screen">
+				<div className="text-4xl font-bold">Loading...</div>
+			</div>
+		);
+
+	return (
+		<CodeEditor
+			id={id}
+			initialCode={data?.code}
+			initialLanguage={data?.language}
+			initialTheme={data?.theme}
+		/>
+	);
 }
