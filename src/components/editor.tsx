@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import MonacoEditor from "@monaco-editor/react";
 
 import { useCreateSnippet, useUpdateSnippet } from "@/hooks/useSnippets";
@@ -25,10 +25,12 @@ export default function CodeEditor({
 	const { doUpdateSnippet } = useUpdateSnippet(() => {});
 	const { doCreateSnippet } = useCreateSnippet(() => {});
 
-	const handleEditorChange = (value: string | undefined): void => {
-		setCode(value || "");
+	useEffect(() => {
+		setCode(code);
+		setLanguage(language);
+		setTheme(theme);
 		setIsShared(false);
-	};
+	}, [code, language, theme]);
 
 	const handleShare = () => {
 		if (id) {
@@ -51,7 +53,6 @@ export default function CodeEditor({
 					width="100%"
 					defaultLanguage={language}
 					value={code}
-					onChange={handleEditorChange}
 					theme={theme}
 				/>
 				<div className="flex justify-between items-center mt-3">
